@@ -1,0 +1,15 @@
+from airflow import DAG
+from airflow.operators.dummy import DummyOperator
+
+from datetime import datetime
+
+default_args = {
+    'start_date': datetime(2021, 1, 1)
+}
+
+with DAG('ml_dag', tags=['data_science'], schedule_interval='@daily', 
+    default_args=default_args, catchup=False) as dag:
+
+    task_a = DummyOperator(
+        task_id="task_a"
+    )
